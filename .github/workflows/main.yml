@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formula 1 — Fan Project</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #0b0c10;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #e10600;
+      padding: 20px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    nav {
+      background-color: #1f2833;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 10px;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    nav a:hover {
+      color: #e10600;
+    }
+    main {
+      padding: 20px;
+    }
+    .card {
+      background-color: #1f2833;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #444;
+    }
+    th {
+      color: #e10600;
+    }
+    img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    .driver {
+      display: flex;
+      align-items: center;
+    }
+    footer {
+      background-color: #111;
+      padding: 15px;
+      text-align: center;
+      font-size: 14px;
+      color: #aaa;
+    }
+    @media (max-width: 700px) {
+      nav { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+  <header>🏎️ Formula 1 — Мини-проект</header>
+
+  <nav>
+    <a href="#" onclick="showPage('home')">🏁 Главная</a>
+    <a href="#" onclick="showPage('news')">📰 Новости</a>
+    <a href="#" onclick="showPage('history')">📘 История</a>
+    <a href="#" onclick="showPage('teams')">🏎 Команды</a>
+    <a href="#" onclick="showPage('live')">📡 Live Race</a>
+  </nav>
+
+  <main id="content"></main>
+
+  <footer>
+    © 2025 Formula 1 Fan Project | Контакты: 
+    <a href="mailto:Fiddyvghddg@gmail.com" style="color:#e10600;">Fiddyvghddg@gmail.com</a>
+  </footer>
+
+  <script>
+    const drivers = [
+      { name: "Макс Ферстаппен", team: "Red Bull", points: 437, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Max_Verstappen_2022.jpg/120px-Max_Verstappen_2022.jpg" },
+      { name: "Ландо Норрис", team: "McLaren", points: 312, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Lando_Norris_2022.jpg/120px-Lando_Norris_2022.jpg" },
+      { name: "Шарль Леклер", team: "Ferrari", points: 298, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Charles_Leclerc_2022.jpg/120px-Charles_Leclerc_2022.jpg" },
+      { name: "Льюис Хэмилтон", team: "Mercedes", points: 270, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Lewis_Hamilton_2022.jpg/120px-Lewis_Hamilton_2022.jpg" }
+    ];
+
+    const news = [
+      { title: "Ферстаппен снова лидирует!", text: "На Гран-при Японии Макс Ферстаппен доминировал с самого старта и финишировал первым.", date: "18 октября 2025" },
+      { title: "McLaren готовит обновления", text: "Команда McLaren объявила о новых аэродинамических улучшениях перед следующей гонкой.", date: "17 октября 2025" },
+      { title: "Ferrari усиливает команду", text: "Ferrari подписала нового инженера из Mercedes для повышения эффективности болида.", date: "15 октября 2025" }
+    ];
+
+    function showPage(page) {
+      const content = document.getElementById('content');
+      if (page === 'home') {
+        content.innerHTML = `
+          <div class="card">
+            <h2>🏁 Текущий рейтинг пилотов</h2>
+            <table>
+              <thead><tr><th>#</th><th>Пилот</th><th>Команда</th><th>Очки</th></tr></thead>
+              <tbody>
+                ${drivers.sort((a,b)=>b.points-a.points).map((d,i)=>`
+                  <tr>
+                    <td>${i+1}</td>
+                    <td><div class="driver"><img src="${d.img}"><span>${d.name}</span></div></td>
+                    <td>${d.team}</td>
+                    <td>${d.points}</td>
+                  </tr>`).join("")}
+              </tbody>
+            </table>
+          </div>`;
+      } 
+      else if (page === 'news') {
+        content.innerHTML = `
+          <div class="card">
+            <h2>📰 Последние новости</h2>
+            ${news.map(n => `
+              <div style="margin-bottom:15px;padding:10px;border-left:3px solid #e10600;">
+                <h3>${n.title}</h3>
+                <p>${n.text}</p>
+                <small>${n.date}</small>
+              </div>
+            `).join("")}
+          </div>`;
+      }
+      else if (page === 'history') {
+        content.innerHTML = `
+          <div class="card">
+            <h2>📘 История Формулы-1</h2>
+            <p>Формула-1 началась в 1950 году как чемпионат мира для гонщиков. 
+            С тех пор она стала вершиной автоспорта, объединяющей технологии, скорость и стратегию. 
+            Знаменитые пилоты, такие как Михаэль Шумахер, Айртон Сенна и Льюис Хэмилтон, оставили огромный след в истории.</p>
+          </div>`;
+      } 
+      else if (page === 'teams') {
+        content.innerHTML = `
+          <div class="card">
+            <h2>🏎 Команды и болиды</h2>
+            <ul>
+              <li><b>Red Bull Racing:</b> RB21 — быстрая и стабильная машина с двигателем Honda.</li>
+              <li><b>Ferrari:</b> SF-24 — сочетание классического дизайна и высокой скорости.</li>
+              <li><b>Mercedes:</b> W15 — инновации в аэродинамике и шасси.</li>
+              <li><b>McLaren:</b> MCL60 — прогрессирующий болид с сильной управляемостью.</li>
+            </ul>
+          </div>`;
+      } 
+      else if (page === 'live') {
+        content.innerHTML = `
+          <div class="card">
+            <h2>📡 Live Race Updates</h2>
+            <p id="liveText">Гонка начинается...</p>
+          </div>`;
+        startLiveRace();
+      }
+    }
+
+    function startLiveRace() {
+      const liveText = document.getElementById('liveText');
+      let lap = 1;
+      const interval = setInterval(() => {
+        if (lap <= 5) {
+          const randomDriver = drivers[Math.floor(Math.random() * drivers.length)];
+          randomDriver.points += Math.floor(Math.random() * 5);
+          liveText.textContent = `Круг ${lap}: ${randomDriver.name} опережает!`;
+          lap++;
+        } else {
+          clearInterval(interval);
+          liveText.textContent = "Гонка завершена! Обновляем рейтинг...";
+          setTimeout(() => showPage('home'), 3000);
+        }
+      }, 3000);
+    }
+
+    showPage('home');
+  </script>
+</body>
+</html>
